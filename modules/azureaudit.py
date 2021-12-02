@@ -1071,6 +1071,7 @@ def rdp_public():
                 flag = 1
                 break
         if flag == 0:
+            j_res = {}
             j_res['value'] = "The network group %s does not allow public RDP access" % network_group
             j_res['type'] = 'PASS'
             j_res['category'] = 'network'
@@ -1161,6 +1162,7 @@ def vm_agent():
     for line in lines.splitlines():
         resource_group, name = line.split()
         check = subprocess.check_output(['az vm show -g %s -n %s --query resources[*].[virtualMachineExtensionType,provisioningState] --output tsv' % (resource_group,name)],shell=True).strip()
+        print(check)
         j_res = {}
         j_res['check_no'] = '7.1'
         j_res['level'] = 'INFO'
@@ -1172,6 +1174,8 @@ def vm_agent():
             j_res['value'] = 'The VM %s does not have virtual agent enabled' %(name)
         else:
             list = check.split()
+            print(list)
+            print(list[1])
             if list[1] == "Succeeded" and list[0] != "":
                 j_res['type'] = 'PASS'
                 j_res['value'] = 'The VM %s does have virtual agent enabled' % (name)
