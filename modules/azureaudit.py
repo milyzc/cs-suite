@@ -1897,7 +1897,7 @@ def azure_audit():
     vm_data_disk()
     approved_extension()
     #vault_key()
-    vault_secret()
+    #vault_secret()
     json_to_html('./reports/AZURE/%s/%s/security_center.json' %(account_name, timestmp),
                         './reports/AZURE/%s/%s/final_report/security_center.html' %(account_name, timestmp))
 
@@ -1910,8 +1910,8 @@ def azure_audit():
                  'reports/AZURE/%s/%s/final_report/network.html' % (account_name, timestmp))
     json_to_html('./reports/AZURE/%s/%s/vm.json' % (account_name, timestmp),
                  'reports/AZURE/%s/%s/final_report/vm.html' % (account_name, timestmp))
-    json_to_html('./reports/AZURE/%s/%s/vault.json' % (account_name, timestmp),
-                 'reports/AZURE/%s/%s/final_report/vault.html' % (account_name, timestmp))
+    #json_to_html('./reports/AZURE/%s/%s/vault.json' % (account_name, timestmp),
+    #            'reports/AZURE/%s/%s/final_report/vault.html' % (account_name, timestmp))
     json_to_html('./reports/AZURE/%s/%s/sql_db.json' % (account_name, timestmp),
                  'reports/AZURE/%s/%s/final_report/sql_db.html' % (account_name, timestmp))
     merge_json()
