@@ -1161,7 +1161,9 @@ def vm_agent():
     data = []
     for line in lines.splitlines():
         resource_group, name = line.split()
-        check = subprocess.check_output(['az vm show -g %s -n %s --query resources[*].[virtualMachineExtensionType,provisioningState] --output tsv' % (resource_group,name)],shell=True).strip()
+        cmd = 'az vm show -g %s -n %s --query resources[*].[virtualMachineExtensionType,provisioningState] --output tsv' % (resource_group,name)
+        print(cmd)
+        check = subprocess.check_output([cmd],shell=True).strip()
         print(check)
         j_res = {}
         j_res['check_no'] = '7.1'
@@ -1174,12 +1176,11 @@ def vm_agent():
             j_res['value'] = 'The VM %s does not have virtual agent enabled' %(name)
         else:
             list = check.split()
-            print(list)
-            print(list[1])
             if list[1] == "Succeeded" and list[0] != "":
                 j_res['type'] = 'PASS'
                 j_res['value'] = 'The VM %s does have virtual agent enabled' % (name)
         data.append(j_res)
+        print(j_res)
         log_data = dict()
         log_data = j_res
         log_data["data"] = log_data.pop("value")
