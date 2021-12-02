@@ -1896,7 +1896,7 @@ def azure_audit():
     vm_os_disk()
     vm_data_disk()
     approved_extension()
-    vault_key()
+    #vault_key()
     vault_secret()
     json_to_html('./reports/AZURE/%s/%s/security_center.json' %(account_name, timestmp),
                         './reports/AZURE/%s/%s/final_report/security_center.html' %(account_name, timestmp))
