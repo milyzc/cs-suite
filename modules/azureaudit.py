@@ -1161,6 +1161,8 @@ def vm_agent():
     data = []
     for line in lines.splitlines():
         resource_group, name = line.split()
+        if "test" in name:
+            continue
         cmd = 'az vm show -g %s -n %s --query resources[*].[virtualMachineExtensionType,provisioningState] --output tsv' % (resource_group,name)
         print(cmd)
         check = subprocess.check_output([cmd],shell=True).strip()
